@@ -1,0 +1,15 @@
+{
+  "name": "Яндекс.Новости",
+  "version": "1.0",
+  "description": "Первая в России служба автоматической обработки и систематизации новостей.",
+  "icons": { "128": "news_icon.png" },
+  "browser_action": {
+    "default_title": "Яндекс.Новости",
+    "default_icon": "news_action.png",
+    "popup": "feed.html"
+  },
+  "permissions": [
+    "tabs",
+    "http://news.yandex.ru/*"
+  ]
+}
