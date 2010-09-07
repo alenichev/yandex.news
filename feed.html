@@ -171,7 +171,7 @@ function buildPreview(doc) {
   }
 
   // Construct the iframe's HTML.
-  var iframe_src = "<!doctype html><html><head><script>" +
+  var iframe_src = "<!doctype html><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'><script>" +
                    document.getElementById("iframe_script").textContent + "<" +
                    "/script></head><body onload='frameLoaded();' " +
                    "style='padding:0px;margin:0px;'>";
@@ -229,13 +229,13 @@ function buildPreview(doc) {
     // The story body is created as an iframe with a data: URL in order to
     // isolate it from this page and protect against XSS.  As a data URL, it
     // has limited privileges and must communicate back using postMessage().
-    desc.src="data:text/html," + iframe_src + itemDesc + "</body></html>";
+    desc.src="data:text/html;charset=utf-8," + iframe_src + itemDesc + "</body></html>";
   }
 
   if (moreStoriesUrl) {
     var more = document.createElement("a");
     more.className = "more";
-    more.innerText = "More stories \u00BB";
+    more.innerText = "Все новости \u00BB";
     more.addEventListener("click", moreStories);
     feed.appendChild(more);
   }
