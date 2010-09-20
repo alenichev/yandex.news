@@ -165,7 +165,8 @@ function buildPreview(doc) {
   if (titleImg) {
     img.src = titleImg;
     if (moreStoriesUrl) {
-      document.getElementById("title_a").addEventListener("click", 	                                                     moreStories);
+      document.getElementById("title_a").addEventListener("click",
+                                         moreStories);
       document.getElementById("title_a").addEventListener("keydown",
                                          function(event) {
                                            if (event.keyCode == 13) {
