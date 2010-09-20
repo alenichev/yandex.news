@@ -161,22 +161,33 @@ function buildPreview(doc) {
     }
   }
   var img = document.getElementById("title");
+  // Listen for mouse and key events
   if (titleImg) {
     img.src = titleImg;
     if (moreStoriesUrl) {
-      document.getElementById("title_a").addEventListener("click", moreStories);
+      document.getElementById("title_a").addEventListener("click", 	                                                     moreStories);
+      document.getElementById("title_a").addEventListener("keydown",
+                                         function(event) {
+                                           if (event.keyCode == 13) {
+                                             moreStories(event);
+                                           }});
     }
   } else {
     img.style.display = "none";
   }
 
   // Construct the iframe's HTML.
-  var iframe_src = "<!doctype html><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'><script>" +
+  var iframe_src = "<!doctype html><html><head>" +
+                   "<meta http-equiv='Content-Type' content='text/html; " +
+                   "charset=utf-8'><script>" +
                    document.getElementById("iframe_script").textContent + "<" +
                    "/script></head><body onload='frameLoaded();' " +
                    "style='padding:0px;margin:0px;'>";
 
   var feed = document.getElementById("feed");
+  // Set ARIA role indicating the feed element has a tree structure
+  feed.setAttribute("role", "tree");
+
   var entries = doc.getElementsByTagName('entry');
   if (entries.length == 0) {
     entries = doc.getElementsByTagName('item');
@@ -212,31 +223,62 @@ function buildPreview(doc) {
     var box = document.createElement("div");
     box.className = "open_box";
     box.addEventListener("click", showDesc);
+    // Disable focusing on box image separately from rest of tree item
+    box.tabIndex = -1;
     item.appendChild(box);
 
     var title = document.createElement("a");
     title.className = "item_title";
+    // Give title an ID for use with ARIA
+    title.id = "item" + i;
     title.innerText = itemTitle;
     title.addEventListener("click", showDesc);
+    title.addEventListener("keydown", keyHandlerShowDesc);
+    // Update aria-activedescendant property in response to focus change
+    // within the tree
+    title.addEventListener("focus", function(event) {
+                                      feed.setAttribute(
+                                        "aria-activedescendant", this.id);
+                                    });
+    // Enable keyboard focus on the item title element
+    title.tabIndex = 0;
+    // Set ARIA role role indicating that the title element is a node in the
+    // tree structure
+    title.setAttribute("role", "treeitem");
+    // Set the ARIA state indicating this tree item is currently collapsed.
+    title.setAttribute("aria-expanded", "false");
+    // Set ARIA property indicating that all items are at the same hierarchical
+    // level (no nesting)
+    title.setAttribute("aria-level", "1");
     item.appendChild(title);
 
     var desc = document.createElement("iframe");
     desc.scrolling = "no";
     desc.className = "item_desc";
+    // Disable keyboard focus on elements in iFrames that have not been
+    // displayed yet
+    desc.tabIndex = -1;
+
     item.appendChild(desc);
     feed.appendChild(item);
 
     // The story body is created as an iframe with a data: URL in order to
     // isolate it from this page and protect against XSS.  As a data URL, it
     // has limited privileges and must communicate back using postMessage().
-    desc.src="data:text/html;charset=utf-8," + iframe_src + itemDesc + "</body></html>";
+    desc.src="data:text/html;charset=utf-8," + iframe_src + itemDesc +
+             "</body></html>";
   }
 
   if (moreStoriesUrl) {
     var more = document.createElement("a");
     more.className = "more";
     more.innerText = "Все новости \u00BB";
+    more.tabIndex = 0;
     more.addEventListener("click", moreStories);
+    more.addEventListener("keydown", function(event) {
+                                       if (event.keyCode == 13) {
+                                         moreStories(event);
+                                       }});
     feed.appendChild(more);
   }
 }
@@ -254,6 +296,29 @@ function moreStories(event) {
   showUrl(moreStoriesUrl);
 }
 
+function keyHandlerShowDesc(event) {
+// Display content under heading when spacebar or right-arrow pressed
+// Hide content when spacebar pressed again or left-arrow pressed
+// Move to next heading when down-arrow pressed
+// Move to previous heading when up-arrow pressed
+  if (event.keyCode == 32) {
+    showDesc(event);
+  } else if ((this.parentNode.className == "item opened") &&
+           (event.keyCode == 37)) {
+    showDesc(event);
+  } else if ((this.parentNode.className == "item") && (event.keyCode == 39)) {
+    showDesc(event);
+  } else if (event.keyCode == 40) {
+    if (this.parentNode.nextSibling) {
+      this.parentNode.nextSibling.children[1].focus();
+    }
+  } else if (event.keyCode == 38) {
+    if (this.parentNode.previousSibling) {
+      this.parentNode.previousSibling.children[1].focus();
+    }
+  }
+}
+
 function showDesc(event) {
   var item = event.currentTarget.parentNode;
   var items = document.getElementsByClassName("item");
@@ -262,9 +327,17 @@ function showDesc(event) {
     if (items[i] == item && items[i].className == "item") {
       items[i].className = "item opened";
       iframe.contentWindow.postMessage("reportHeight", "*");
+      // Set the ARIA state indicating the tree item is currently expanded.
+      items[i].getElementsByClassName("item_title")[0].
+        setAttribute("aria-expanded", "true");
+      iframe.tabIndex = 0;
     } else {
       items[i].className = "item";
       iframe.style.height = "0px";
+      // Set the ARIA state indicating the tree item is currently collapsed.
+      items[i].getElementsByClassName("item_title")[0].
+        setAttribute("aria-expanded", "false");
+      iframe.tabIndex = -1;
     }
   }
 }
@@ -304,7 +377,7 @@ window.addEventListener("message", iframeMessageHandler);
 </script>
 </head>
 <body onload="main();">
-<a id="title_a"><img id='title'></a>
+<a id="title_a" tabIndex="0"><img id='title' alt="Yandex.News logo"></a>
 <div id="feed"></div>
 </body>
 </html>
