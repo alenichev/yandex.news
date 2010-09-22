@@ -1,0 +1,183 @@
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+<title>Настройка расширения Яндекс.Новости</title>
+</head>
+<script type="text/javascript">
+
+// Saves options to localStorage.
+function save_options() {
+  var select = document.getElementById("rubrica");
+  var rssurl = select.children[select.selectedIndex].value;
+  localStorage["feedUrl"] = rssurl;
+
+  // Update status to let user know options were saved.
+  var status = document.getElementById("status");
+  status.innerHTML = "Options Saved.";
+  setTimeout(function() {
+    status.innerHTML = "";
+  }, 750);
+}
+
+// Restores select box state to saved value from localStorage.
+function restore_options() {
+  var rssurl = localStorage["feedUrl"];
+  if (!rssurl) {
+    return;
+  }
+  var select = document.getElementById("rubrica");
+  for (var i = 0; i < select.children.length; i++) {
+    var child = select.children[i];
+    if (child.value == rssurl) {
+      child.selected = "true";
+      break;
+    }
+  }
+}
+
+</script>
+
+<body onload="restore_options()">
+
+Тематика новостей
+<select style="WIDTH: 160px" id=rubrica>
+ <option value="http://news.yandex.ru/hardware.rss">Hardware</option>
+ <option value="http://news.yandex.ua/hardware.rss">Hardware (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/computers.rss">Hi-Tech</option>
+ <option value="http://news.yandex.ua/computers.rss">Hi-Tech (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/auto.rss">Авто</option>
+ <option value="http://news.yandex.ua/auto.rss">Авто (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/auto_racing.rss">Автоспорт</option>
+ <option value="http://news.yandex.ua/auto_racing.rss">Автоспорт (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/basketball.rss">Баскетбол</option>
+ <option value="http://news.yandex.ua/basketball.rss">Баскетбол (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/security.rss">Безопасность</option>
+ <option value="http://news.yandex.ua/security.rss">Безопасность (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/world.rss">В мире</option>
+ <option value="http://news.yandex.ua/world.rss">В мире (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/galleries.rss">Выставки</option>
+ <option value="http://news.yandex.ua/galleries.rss">Выставки (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/index.rss">Главные новости</option>
+ <option value="http://news.yandex.ua/index.rss">Главные новости (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/flu.rss">Грипп</option>
+ <option value="http://news.yandex.ua/flu.rss">Грипп (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/martial_arts.rss">Единоборства</option>
+ <option value="http://news.yandex.ua/martial_arts.rss">Единоборства (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/health.rss">Здоровье</option>
+ <option value="http://news.yandex.ua/health.rss">Здоровье (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/internet.rss">Интернет</option>
+ <option value="http://news.yandex.ua/internet.rss">Интернет (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/movies.rss">Кино</option>
+ <option value="http://news.yandex.ua/movies.rss">Кино (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/culture.rss">Культура</option>
+ <option value="http://news.yandex.ua/culture.rss">Культура (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/metallurgy.rss">Металлургия</option>
+ <option value="http://news.yandex.ua/metallurgy.rss">Металлургия (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/mobile.rss">Мобильная связь</option>
+ <option value="http://news.yandex.ua/mobile.rss">Мобильная связь (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/music.rss">Музыка</option>
+ <option value="http://news.yandex.ua/music.rss">Музыка (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/science.rss">Наука</option>
+ <option value="http://news.yandex.ua/science.rss">Наука (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/realty.rss">Недвижимость</option>
+ <option value="http://news.yandex.ua/realty.rss">Недвижимость (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/blogs.rss">Новости в блогах</option>
+ <option value="http://news.yandex.ua/blogs.rss">Новости в блогах (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/society.rss">Общество</option>
+ <option value="http://news.yandex.ua/society.rss">Общество (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/politics.rss">Политика</option>
+ <option value="http://news.yandex.ua/politics.rss">Политика (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/incident.rss">Происшествия</option>
+ <option value="http://news.yandex.ua/incident.rss">Происшествия (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/religion.rss">Религия</option>
+ <option value="http://news.yandex.ua/religion.rss">Религия (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/software.rss">Софт</option>
+ <option value="http://news.yandex.ua/software.rss">Софт (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/sport.rss">Спорт</option>
+ <option value="http://news.yandex.ua/sport.rss">Спорт (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/insurance.rss">Страхование</option>
+ <option value="http://news.yandex.ua/insurance.rss">Страхование (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/theaters.rss">Театры</option>
+ <option value="http://news.yandex.ua/theaters.rss">Театры (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/topnews.rss">Тема дня</option>
+ <option value="http://news.yandex.ua/topnews.rss">Тема дня (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/tennis.rss">Теннис</option>
+ <option value="http://news.yandex.ua/tennis.rss">Теннис (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/transport.rss">Транспорт</option>
+ <option value="http://news.yandex.ua/transport.rss">Транспорт (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/travels.rss">Туризм</option>
+ <option value="http://news.yandex.ua/travels.rss">Туризм (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/finances.rss">Финансы</option>
+ <option value="http://news.yandex.ua/finances.rss">Финансы (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/football.rss">Футбол</option>
+ <option value="http://news.yandex.ua/football.rss">Футбол (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/hockey.rss">Хоккей</option>
+ <option value="http://news.yandex.ua/hockey.rss">Хоккей (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/business.rss">Экономика</option>
+ <option value="http://news.yandex.ua/business.rss">Экономика (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/energy.rss">Энергетика</option>
+ <option value="http://news.yandex.ua/energy.rss">Энергетика (украинский выпуск)</option>
+ <option value="http://news.yandex.ru/Austria/index.rss">Австрия</option>
+ <option value="http://news.yandex.ru/Azerbaijan/index.rss">Азербайджан</option>
+ <option value="http://news.yandex.ru/Albania/index.rss">Албания</option>
+ <option value="http://news.yandex.ru/Andorra/index.rss">Андорра</option>
+ <option value="http://news.yandex.ru/Armenia/index.rss">Армения</option>
+ <option value="http://news.yandex.ru/Belarus/index.rss">Беларусь</option>
+ <option value="http://news.yandex.ru/Belgium/index.rss">Бельгия</option>
+ <option value="http://news.yandex.ru/Bolgaria/index.rss">Болгария</option>
+ <option value="http://news.yandex.ru/BosniaHercegovina/index.rss">Босния и Герцеговина</option>
+ <option value="http://news.yandex.ru/Vatican/index.rss">Ватикан</option>
+ <option value="http://news.yandex.ru/GreatBritain/index.rss">Великобритания</option>
+ <option value="http://news.yandex.ru/Hungary/index.rss">Венгрия</option>
+ <option value="http://news.yandex.ru/Germany/index.rss">Германия</option>
+ <option value="http://news.yandex.ru/Gibraltar/index.rss">Гибралтар</option>
+ <option value="http://news.yandex.ru/Greece/index.rss">Греция</option>
+ <option value="http://news.yandex.ru/Georgia/index.rss">Грузия</option>
+ <option value="http://news.yandex.ru/Denmark/index.rss">Дания</option>
+ <option value="http://news.yandex.ru/Israel/index.rss">Израиль</option>
+ <option value="http://news.yandex.ru/Ireland/index.rss">Ирландия</option>
+ <option value="http://news.yandex.ru/Iceland/index.rss">Исландия</option>
+ <option value="http://news.yandex.ru/Spain/index.rss">Испания</option>
+ <option value="http://news.yandex.ru/Italy/index.rss">Италия</option>
+ <option value="http://news.yandex.ru/Kazakhstan/index.rss">Казахстан</option>
+ <option value="http://news.yandex.ru/Canada/index.rss">Канада</option>
+ <option value="http://news.yandex.ru/Cyprus/index.rss">Кипр</option>
+ <option value="http://news.yandex.ru/Kirghizia/index.rss">Киргизия</option>
+ <option value="http://news.yandex.ru/China/index.rss">Китай</option>
+ <option value="http://news.yandex.ru/Latvia/index.rss">Латвия</option>
+ <option value="http://news.yandex.ru/Lithuania/index.rss">Литва</option>
+ <option value="http://news.yandex.ru/Liechtenstein/index.rss">Лихтенштейн</option>
+ <option value="http://news.yandex.ru/Luxembourg/index.rss">Люксембург</option>
+ <option value="http://news.yandex.ru/Macedonia/index.rss">Македония</option>
+ <option value="http://news.yandex.ru/Malta/index.rss">Мальта</option>
+ <option value="http://news.yandex.ru/Moldova/index.rss">Молдова</option>
+ <option value="http://news.yandex.ru/Monaco/index.rss">Монако</option>
+ <option value="http://news.yandex.ru/Netherlands/index.rss">Нидерланды</option>
+ <option value="http://news.yandex.ru/Norway/index.rss">Норвегия</option>
+ <option value="http://news.yandex.ru/Poland/index.rss">Польша</option>
+ <option value="http://news.yandex.ru/Portugal/index.rss">Португалия</option>
+ <option value="http://news.yandex.ru/Romania/index.rss">Румыния</option>
+ <option value="http://news.yandex.ru/USA/index.rss">США</option>
+ <option value="http://news.yandex.ru/SanMarino/index.rss">Сан-Марино</option>
+ <option value="http://news.yandex.ru/Serbia/index.rss">Сербия</option>
+ <option value="http://news.yandex.ru/Slovakia/index.rss">Словакия</option>
+ <option value="http://news.yandex.ru/Slovenia/index.rss">Словения</option>
+ <option value="http://news.yandex.ru/Tadjikistan/index.rss">Таджикистан</option>
+ <option value="http://news.yandex.ru/Turkmenistan/index.rss">Туркмения</option>
+ <option value="http://news.yandex.ru/Turkey/index.rss">Турция</option>
+ <option value="http://news.yandex.ru/Uzbekistan/index.rss">Узбекистан</option>
+ <option value="http://news.yandex.ru/Finland/index.rss">Финляндия</option>
+ <option value="http://news.yandex.ru/France/index.rss">Франция</option>
+ <option value="http://news.yandex.ru/Croatia/index.rss">Хорватия</option>
+ <option value="http://news.yandex.ru/Montenegro/index.rss">Черногория</option>
+ <option value="http://news.yandex.ru/Czech/index.rss">Чехия</option>
+ <option value="http://news.yandex.ru/Switzerland/index.rss">Швейцария</option>
+ <option value="http://news.yandex.ru/Sweden/index.rss">Швеция</option>
+ <option value="http://news.yandex.ru/Estonia/index.rss">Эстония</option>
+ <option value="http://news.yandex.ru/Japan/index.rss">Япония</option>
+</select>
+
+<br>
+<button onclick="save_options()">Сохранить</button>
+</body>
+</html>

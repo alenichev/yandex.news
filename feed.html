@@ -102,7 +102,11 @@ function messageHandler(event) {
 </script>
 <script>
 // Feed URL.
-var feedUrl = 'http://news.yandex.ru/index.rss';
+var feedUrl = localStorage["feedUrl"];
+if (!feedUrl) {
+  feedUrl = 'http://news.yandex.ru/index.rss';
+  localStorage["feedUrl"] = feedUrl;
+}
 
 // The XMLHttpRequest object that tries to load and parse the feed.
 var req;
