@@ -1,16 +1,17 @@
 {
-  "name": "Яндекс.Новости",
+  "name": "__MSG_name__",
   "version": "1.2",
-  "description": "Первая в России служба автоматической обработки и систематизации новостей. Сообщения ведущих российских и мировых СМИ.",
+  "description": "__MSG_description__",
   "icons": { "128": "news_icon.png" },
-  "options_page": "options.html",
+  "default_locale": "ru",
   "browser_action": {
-    "default_title": "Яндекс.Новости",
     "default_icon": "news_action.png",
     "popup": "feed.html"
   },
+  "options_page": "options.html",
   "permissions": [
-    "tabs",
-    "http://news.yandex.ru/*"
+    "http://news.yandex.ru/*",
+    "http://news.yandex.ua/*",
+    "tabs"
   ]
 }

@@ -1,0 +1,36 @@
+{
+  "name": {
+    "message": "Яндекс.Новости",
+    "description": "Extension name in manifest."
+  },
+  "description": {
+    "message": "Расширение показывает первые пять новостей с сайта Яндекс.Новости во всплывающем окне. По умолчанию используется тематика 'Главные новости'.",
+    "description": "Extension description in manifest."
+  },
+  "error": {
+    "message": "Ошибка: $error$",
+    "description": "Generic error template. Expects error parameter to be passed in.",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "Failed to fetch RSS feed."
+      }
+    }
+  },
+  "failed_to_fetch_rss": {
+    "message": "Невозможно получить поток RSS.",
+    "description": "User visible error message."
+  },
+  "not_a_valid_feed": {
+    "message": "Ошибка в потоке RSS.",
+    "description": "User visible error message."
+  },
+  "unknown_title": {
+    "message": "Неизвестный заголовок",
+    "description": "Unknown news title."
+  },
+  "more_stories": {
+    "message": "Все новости \u00BB",
+    "description": "Link name to more news."
+  }
+}
