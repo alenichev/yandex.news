@@ -2,10 +2,11 @@
   "name": "__MSG_name__",
   "version": "1.4",
   "description": "__MSG_description__",
-  "icons": { "128": "news_icon.png" },
+  "icons": {  "16": "images/icon16.png",
+             "128": "news_icon.png" },
   "default_locale": "ru",
   "browser_action": {
-    "default_icon": "news_action.png",
+    "default_icon": "images/icon19.png",
     "popup": "feed.html"
   },
   "options_page": "options.html",
