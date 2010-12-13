@@ -3,7 +3,8 @@
   "version": "1.4",
   "description": "__MSG_description__",
   "icons": {  "16": "images/icon16.png",
-             "128": "news_icon.png" },
+              "48": "images/icon48.png",
+             "128": "images/icon128.png" },
   "default_locale": "ru",
   "browser_action": {
     "default_icon": "images/icon19.png",
