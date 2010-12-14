@@ -2,9 +2,58 @@
 <head>
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
 <title>Настройка расширения Яндекс.Новости</title>
-</head>
-<script type="text/javascript">
+<style>
+body {
+  font-family: helvetica, arial, sans-serif;
+  font-size: 80%;
+  margin: 10px;
+}
 
+#header {
+  padding-bottom: 1.5em;
+  padding-top: 1.5em;
+}
+
+#header h1 {
+  font-size: 156%;
+  display: inline;
+  padding-bottom: 43px;
+  padding-left: 75px;
+  padding-top: 40px;
+  background: url(images/icon128.png) no-repeat;
+  background-size: 67px;
+  background-position: 1px 18px;
+}
+
+.section-header {
+  background: #ebeff9;
+  border-top: 1px solid #b5c7de;
+  font-size: 99%;
+  padding: 3px 0 2px 5px;
+  font-weight: bold;
+  margin-bottom: 1em;
+  margin-top: 4em;
+}
+
+.section-header.first {
+  margin-top: 1em;
+}
+
+#login {
+  width: 100px;
+  margin-left: 2px;
+}
+
+#password {
+  width: 100px;
+  margin-left: 2px;
+}
+
+#footer {
+  margin-top: 4em;
+}
+</style>
+<script type="text/javascript">
 // Saves options to localStorage.
 function save_options() {
   var select = document.getElementById("rubrica");
@@ -34,13 +83,15 @@ function restore_options() {
     }
   }
 }
-
 </script>
-
+</head>
 <body onload="restore_options()">
 
-Тематика новостей
-<select style="WIDTH: 160px" id=rubrica>
+<div id="header"><h1>Настройка расширения Яндекс.Новости</h1></div>
+
+<div class="section-header first">Тематика новостей</div>
+
+<p><select style="WIDTH: 160px" id="rubrica">
  <option value="http://news.yandex.ru/hardware.rss">Hardware</option>
  <option value="http://news.yandex.ua/hardware.rss">Hardware (украинский выпуск)</option>
  <option value="http://news.yandex.ru/computers.rss">Hi-Tech</option>
@@ -176,8 +227,11 @@ function restore_options() {
  <option value="http://news.yandex.ru/Estonia/index.rss">Эстония</option>
  <option value="http://news.yandex.ru/Japan/index.rss">Япония</option>
 </select>
+</p>
 
-<br>
-<button onclick="save_options()">Сохранить</button>
+<div id="footer">
+  <button id="save-button" style="font-weight:bold" onclick="save_options()">Сохранить</button>
+</div>
+
 </body>
 </html>
